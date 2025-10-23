@@ -1,0 +1,7 @@
+
+xray.dir.bin = поменять (путь до исполняемого файла https://github.com/XTLS/Xray-core/releases/tag/v25.10.15 ) /Java/vpn-config-parser/tools/xray/xray
+xray.dir.temp.config = поменять (путь до временных конфигов) /temp/xrayConfigs
+
+proxy.port = 1080
+proxy.host = localhost
+
