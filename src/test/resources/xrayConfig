@@ -1,0 +1,24 @@
+{
+  "inbounds": [
+    {
+      "port": 1080,
+      "protocol": "socks",
+      "settings": { "udp": true }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "shadowsocks",
+      "settings": {
+        "servers": [
+          {
+            "address": "81.90.31.219",
+            "port": 443,
+            "method": "chacha20-ietf-poly1305",
+            "password": "6H8Q1OXKZROJVxdeOv6lo7"
+          }
+        ]
+      }
+    }
+  ]
+}

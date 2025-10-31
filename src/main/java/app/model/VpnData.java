@@ -13,4 +13,6 @@ public class VpnData
     String ssLink;
     String port;
     String host;
+
+    VpnDataError errorStatus;
 }

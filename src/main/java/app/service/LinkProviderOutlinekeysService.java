@@ -2,15 +2,17 @@ package app.service;
 
 import app.integration.outlinekeys.OutlinekeysClient;
 import app.mapper.OutlinekeysMapper;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutlinekeysService
+@Slf4j
+public class LinkProviderOutlinekeysService implements LinksProvider
 {
     OutlinekeysClient client;
 
-    public OutlinekeysService()
+    public LinkProviderOutlinekeysService()
     {
         this.client = new OutlinekeysClient();
     }
@@ -35,7 +37,16 @@ public class OutlinekeysService
 
     public int getPageSize(String country)
     {
-        int pageSize =  client.getCountryPageSize(country);
+        int pageSize;
+        try
+        {
+            pageSize =  client.getCountryPageSize(country);
+        }
+        catch (Exception ex)
+        {
+            pageSize = -1;
+            log.warn("Outlinekeys site error: {}" , ex.getMessage());
+        }
 
         return pageSize == -1 ? 1 : pageSize;
     }

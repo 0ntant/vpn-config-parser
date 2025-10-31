@@ -1,9 +1,8 @@
-package app.integration.stdout.dto;
+package app.integration.stdout;
 
 import app.mapper.StdoutMapper;
 import app.model.VpnData;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class StdOutWriter

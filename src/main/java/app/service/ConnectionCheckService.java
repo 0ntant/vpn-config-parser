@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 import static app.config.CheckStatusConfig.INVALID_MBPS;
+import static app.config.NetConfig.TIMEOUT_SECONDS;
 import static app.config.ProcessStatusConfig.RUN_ERROR;
 import static app.config.ProcessStatusConfig.RUN_TIMEOUT;
 
@@ -74,7 +75,7 @@ public class ConnectionCheckService
     {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Double> future = executor.submit(() -> speedtestService.getSpeed());
-        int secTimeout = 20;
+        int secTimeout = TIMEOUT_SECONDS;
         try
         {
             return future.get(secTimeout, TimeUnit.SECONDS);

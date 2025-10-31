@@ -1,6 +1,10 @@
 
-xray.dir.bin = поменять (путь до исполняемого файла https://github.com/XTLS/Xray-core/releases/tag/v25.10.15 ) /Java/vpn-config-parser/tools/xray/xray
-xray.dir.temp.config = поменять (путь до временных конфигов) /temp/xrayConfigs
+xray.dir.bin = /Java/vpn-config-parser/tools/xray/xray (путь до исполняемого файла https://github.com/XTLS/Xray-core/releases/tag/v25.10.15 )
+xray.dir.temp.config = /temp/xrayConfigs (путь до временных конфигов)
+
+net.timeoutSeconds = 10 (целое число не меньше 1)
+
+dir.out.file = /Java/vpn-config-parser/out.txt (путь до файла вывода с любым расширением)
 
 proxy.port = 1080
 proxy.host = localhost

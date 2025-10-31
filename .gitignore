@@ -38,8 +38,8 @@ build/
 ### Mac OS ###
 .DS_Store
 
-test/*
-test
+tests/*
+tests
 logs
 
 tools
@@ -47,5 +47,7 @@ tools/*
 
 temp
 temp/*
+
+out.txt
 
 config.properties

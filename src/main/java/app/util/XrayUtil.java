@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import static app.config.ProcessStatusConfig.*;
-import static app.config.XrayConfig.XRAY_BIN_DIR;
+import static app.config.DirConfig.XRAY_BIN_DIR;
 
 @Slf4j
 public class XrayUtil
