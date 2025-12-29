@@ -1,6 +1,6 @@
 package app.service;
 
-public interface zIpInfoProvider
+public interface IpInfoProvider
 {
     String getCountryByIp(String ipAddress);
 }
