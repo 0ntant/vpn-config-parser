@@ -1,10 +1,8 @@
 package app.service;
 
 import app.model.VpnData;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
 import java.util.concurrent.*;
 
 import static app.config.CheckStatusConfig.INVALID_MBPS;
@@ -23,7 +21,7 @@ public class ConnectionCheckService
     {
         speedtestService = new SpeedtestService();
         netConnectionService=  new NetConnectionService();
-        xrayService= new XrayService();
+        xrayService= new XrayServiceImp();
     }
 
     public void fillFields(VpnData vpnData)
@@ -48,7 +46,7 @@ public class ConnectionCheckService
     }
 
     public void fillMbpsField(VpnData vpnData) {
-        int xrayStatus = xrayService.run(vpnData.getTempDir());
+        int xrayStatus = xrayService.runXray(vpnData.getTempDir());
         double mbpsValue;
 
         if (xrayStatus == RUN_TIMEOUT || xrayStatus == RUN_ERROR)
@@ -90,7 +88,8 @@ public class ConnectionCheckService
         {
             log.error(e.getMessage());
             return INVALID_MBPS;
-        } finally
+        }
+        finally
         {
             executor.shutdownNow();
         }

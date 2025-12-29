@@ -16,7 +16,7 @@ public class StringUtilIT
 {
 
     @Test
-    void testStringUtilFunctions() throws IOException
+    void testExtractFirstIpv4() throws IOException
     {
         //given
         String linksFromFile = Files.readString(
@@ -37,5 +37,27 @@ public class StringUtilIT
             link.ifPresent(System.out::println);
         }
 
+    }
+
+    @Test
+    void testDedupByIp() throws IOException
+    {
+        //given
+        String linksFromFile = Files.readString(
+                Path.of("./src/test/resources/XrayConfigsWithDuplicates")
+        );
+        List<String> links = Arrays.stream(linksFromFile.split("\n")).toList();
+
+        //then
+        List<String> unique = StringUtil.dedupByIp(links);
+
+        //expected
+        assertFalse(unique.isEmpty());
+        assertTrue(unique.size() > 1);
+
+       for(String line: unique)
+       {
+           System.out.println(line);
+       }
     }
 }

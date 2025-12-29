@@ -17,7 +17,7 @@ public class LinkProviderGithubService implements LinksProvider
 
     public LinkProviderGithubService()
     {
-        ipInfoProvider = new IpInfoProvider();
+        ipInfoProvider = new IpInfoGeolite2Provider();
         client = new GithubClient();
     }
 
@@ -35,6 +35,23 @@ public class LinkProviderGithubService implements LinksProvider
        }
 
        return links;
+    }
+
+    @Override
+    public int getPageSize(String country)
+    {
+        return getXrayUris().size();
+    }
+
+    @Override
+    public List<String> getPageLinks(String country, int page)
+    {
+        String xrayUri = getXrayUris().get(page);
+
+        return  filterLink(
+                getLinksFromUrl(xrayUri) ,
+                country
+        );
     }
 
     public List<String> getLinksFromUrl(String url)

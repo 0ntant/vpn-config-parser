@@ -1,14 +1,14 @@
 package service;
 
-import app.service.IpInfoProvider;
+import app.service.IpApiInfoProvider;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class IpInfoProviderIT
+public class IpApiInfoProviderIT
 {
 
-    IpInfoProvider service = new IpInfoProvider();
+    IpApiInfoProvider service = new IpApiInfoProvider();
 
     @Test
     void getRussianPageSize_return4()
@@ -20,6 +20,6 @@ public class IpInfoProviderIT
         String country = service.getCountryByIp(ipAddress);
 
         //expected
-        assertEquals("Australia" , country);
+        assertEquals("HK" , country);
     }
 }

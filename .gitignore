@@ -49,5 +49,7 @@ temp
 temp/*
 
 out.txt
+out_no_duplicate.txt
 
 config.properties
+GeoLite2-Country.mmdb

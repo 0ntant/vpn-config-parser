@@ -4,6 +4,7 @@ package app.util;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -13,15 +14,18 @@ public class FileUtil
     {
         try
         {
-            Files.write(pathToFile, data.getBytes());
+            Files.write(
+                    pathToFile,
+                    data.getBytes(),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+            );
             return pathToFile.toString();
-        }
-        catch (Exception ex)
+        } catch (Exception ex)
         {
-            throw  new RuntimeException(ex);
+            throw new RuntimeException(ex);
         }
     }
-
     public static String read(String pathToFile) {
         Path path = Paths.get(pathToFile);
         try

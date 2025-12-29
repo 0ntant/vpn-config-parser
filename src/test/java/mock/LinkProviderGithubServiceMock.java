@@ -24,6 +24,19 @@ public class LinkProviderGithubServiceMock
                 country) ;
     }
 
+    @Override
+    public int getPageSize(String country) {
+        return provider.filterLink(
+                provider.getLinksFromUrl(gitHubUrl) ,
+                country).size();
+    }
+
+    @Override
+    public List<String> getPageLinks(String country, int page)
+    {
+        return provider.getPageLinks(country,page);
+    }
+
     public List<String> getLinksFromUrl(String url)
     {
         return provider.getLinksFromUrl(gitHubUrl);

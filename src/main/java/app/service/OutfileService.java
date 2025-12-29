@@ -20,10 +20,8 @@ public class OutfileService implements OutService
     {
         String ssLinksList = dataList.stream()
                 .map(VpnData::getSsLink)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining("\n", "\n", ""));
         Path path = Paths.get(OUTFILE_DIR);
-
-        log.info("Write all links in file: {}", path);
 
         FileUtil.create(path, ssLinksList);
     }

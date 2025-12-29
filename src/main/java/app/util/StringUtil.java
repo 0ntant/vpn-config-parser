@@ -2,7 +2,7 @@ package app.util;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,5 +34,37 @@ public class StringUtil
             return Optional.of(m.group());
         }
         return Optional.empty();
+    }
+
+    public static List<String> dedupByIp(List<String> lines )
+    {
+        Pattern ipPattern = Pattern.compile("@([0-9.]+):");
+
+        Map<String, Integer> count = new HashMap<>();
+        List<String> unique = new ArrayList<>();
+
+        for (String line : lines)
+        {
+            Matcher m = ipPattern.matcher(line);
+            if (m.find())
+            {
+                String ip = m.group(1);
+                count.merge(ip, 1, Integer::sum);
+            }
+        }
+
+        for (String line : lines)
+        {
+            Matcher m = ipPattern.matcher(line);
+            if (m.find())
+            {
+                String ip = m.group(1);
+                if (count.get(ip) == 1)
+                {
+                    unique.add(line);
+                }
+            }
+        }
+        return unique;
     }
 }

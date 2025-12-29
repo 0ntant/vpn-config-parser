@@ -35,6 +35,7 @@ public class LinkProviderOutlinekeysService implements LinksProvider
         return ssLinks;
     }
 
+    @Override
     public int getPageSize(String country)
     {
         int pageSize;
@@ -49,6 +50,16 @@ public class LinkProviderOutlinekeysService implements LinksProvider
         }
 
         return pageSize == -1 ? 1 : pageSize;
+    }
+
+    @Override
+    public List<String> getPageLinks(String country, int page)
+    {
+        return client.getCountryLinks(country, page)
+                .stream()
+                .map(OutlinekeysMapper::linkFromCountryWithLink)
+                .map(client::getSsLink)
+                .toList();
     }
 
     public List<String> getKeys(String country, int page)

@@ -31,7 +31,6 @@ public class SpeedtestClient
                 double seconds = (end - start) / 1_000_000_000.0;
                 double mbps = (total * 8 / 1_000_000.0) / seconds;
                 return mbps;
-               // System.out.printf("✅Speed: %.2f Mbps%n", mbps);
             }
         }
         catch (IOException e)
@@ -48,7 +47,8 @@ public class SpeedtestClient
 
 
     public double getSpeed(String socksHost,
-                               String socksPort) {
+                               String socksPort)
+    {
         try
         {
             System.setProperty("socksProxyHost", socksHost);
@@ -67,17 +67,18 @@ public class SpeedtestClient
                 int bytesRead;
                 while ((bytesRead = in.read(buffer)) != -1) {
                     total += bytesRead;
-                    if (total >= 1024 * 1024) break; // читаем только 1MB
+                    if (total >= 1024 * 1024) break;
                 }
                 long end = System.nanoTime();
                 double seconds = (end - start) / 1_000_000_000.0;
                 return (total * 8 / 1_000_000.0) / seconds;
             }
-        } catch
-        (IOException e)
+        }
+        catch (IOException e)
         {
             throw new RuntimeException(e);
-        } finally
+        }
+        finally
         {
             System.clearProperty("socksProxyHost");
             System.clearProperty("socksProxyPort");

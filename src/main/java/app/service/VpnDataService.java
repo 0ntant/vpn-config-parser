@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,21 +46,6 @@ public class VpnDataService
 
     public List<VpnData> fillSsLinkField (String country)
     {
-//        linkProvider.getAllSsLinksByCountry(country)
-//                .forEach(ssLink -> {
-//                    VpnData vpn = VpnData.builder()
-//                            .ssLink(ssLink)
-//                            .errorStatus(VpnDataError.NONE)
-//                            .build();
-//
-//                    log.info("Start fill {} link", ssLink);
-//                    fillTempDirField(vpn);
-//                    fillHostPortFields(vpn);
-//                    fillPingMbpsFields(vpn);
-//
-//                    vpnData.add(vpn);
-//                });
-
         List<String> ssLinks = linkProvider.getAllSsLinksByCountry(country);
 
         for (String ssLink : ssLinks)
@@ -75,6 +59,30 @@ public class VpnDataService
         vpnData.removeIf(data -> data.getErrorStatus() == VpnDataError.INVALID_CONFIG);
 
         return vpnData;
+    }
+
+    public void asyncWriteInfoFile(String country)
+    {
+        OutfileService outfileService = new OutfileService();
+        int pages = linkProvider.getPageSize(country);
+
+        for(int i = 0 ; i < pages ; i++)
+        {
+            List<String> links = linkProvider.getPageLinks(country, i);
+            log.info("Get {} links", links.size());
+            for(String link : links)
+            {
+                VpnData dataConfig = createVpnConfig(link);
+                if (dataConfig.getMbps() != INVALID_MBPS && dataConfig.getErrorStatus() != VpnDataError.INVALID_CONFIG)
+                {
+                    log.info("Write config={}", dataConfig.getSsLink());
+                    outfileService.sendVpnConf(List.of(dataConfig));
+                }
+            }
+
+        }
+
+        cleanConfigs();
     }
 
     private VpnData createVpnConfig(String ssLink)

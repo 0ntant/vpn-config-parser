@@ -1,6 +1,7 @@
 package service;
 
 import app.service.XrayService;
+import app.service.XrayServiceImp;
 import org.junit.jupiter.api.Test;
 
 import static app.config.DirConfig.XRAY_BIN_DIR;
@@ -8,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class XrayServiceIT
 {
-    XrayService service = new XrayService();
+    XrayService service = new XrayServiceImp();
 
     @Test
     void xrayLifeCycle()
@@ -16,7 +17,7 @@ public class XrayServiceIT
         //given
         String config = String.format("%s/%s", XRAY_BIN_DIR, "config1.json");
         //then
-        service.run(config);
+        service.runXray(config);
 
         //expected
         assertTrue(service.isAlive());

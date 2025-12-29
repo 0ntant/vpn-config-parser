@@ -5,6 +5,9 @@ xray.dir.temp.config = /temp/xrayConfigs (путь до временных ко�
 net.timeoutSeconds = 10 (целое число не меньше 1)
 
 dir.out.file = /Java/vpn-config-parser/out.txt (путь до файла вывода с любым расширением)
+dir.out.file_no_duplicate = /Java/vpn-config-parser/out_no_duplicate.txt (путь до файла без дулблей по ip вывода с любым расширением)
+
+dir.geoip2.file = /Java/vpn-config-parser/GeoLite2-Country.mmdb (путь до бд GeoLite2)
 
 proxy.port = 1080
 proxy.host = localhost
